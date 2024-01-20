@@ -4,12 +4,12 @@ import "./styles/globals.css";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { ProductsList } from "./views/ProductsList/ProductsList.jsx";
+import { ProductDetais } from "./views/ProductDetais/ProductDetais.jsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <ProductsList />,
+    element: <ProductDetais />,
   },
 ]);
 
