@@ -8,27 +8,21 @@ import { MainContent } from "../MainContent/MainContent";
 import { MainMenu } from "../MainMenu/MainMenu";
 import { TopBar } from "../TopBar/TopBar";
 import { CurrencyContext } from "../../contexts/CurrencyContext";
-import { useState } from "react";
 import { CURRENCIES } from "../../constants/currencies";
 import { CartContext } from "../../contexts/CartContext";
+import { useLocalStorage } from "../../hooks/useLocalStorage";
 
 export function Layout() {
-  const [currency, setCurrency] = useState(
-    localStorage["selected_currency"] || CURRENCIES.PLN
+  const [currency, setCurrency] = useLocalStorage(
+    "selected_currency",
+    CURRENCIES.PLN
   );
 
-  const [cartItem, setCartItem] = useState(() => {
-    return localStorage["cart_products"]
-      ? JSON.parse(localStorage["cart_products"])
-      : [];
-  });
+  const [cartItem, setCartItem] = useLocalStorage("cart_products", []);
 
   function addProductToCart(product) {
-    setCartItem((previousCartItems) => {
-      const newState = [...previousCartItems, product];
-      localStorage["cart_products"] = JSON.stringify(newState);
-      return newState;
-    });
+    const newState = [...cartItem, product];
+    setCartItem(newState);
   }
 
   return (
